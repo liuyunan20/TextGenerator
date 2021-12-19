@@ -6,4 +6,5 @@ for word in words:
     if word == 'summer\n':
         i += 1
 print(i)
+my_file.close()
 
