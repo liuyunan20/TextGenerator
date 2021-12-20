@@ -4,5 +4,3 @@ text = input()
 sentences = sent_tokenize(text)
 n = int(input())
 print(regexp_tokenize(sentences[n], "[A-z']+"))
-
-
