@@ -1,9 +1,8 @@
 from nltk.tokenize import regexp_tokenize
 from nltk.tokenize import WhitespaceTokenizer
-f = open(f'/Users/liudawei/PycharmProjects/Text Generator/Text Generator/task/test/corpus.txt', "r", encoding="utf-8")
+f = open(f'/Users/liudawei/PycharmProjects/Text Generator/Text Generator/task/{input()}', "r", encoding="utf-8")
 wt = WhitespaceTokenizer()
 words = wt.tokenize(f.read())
-print(words)
 uniq_words = set()
 for x in words:
     uniq_words.add(x)
