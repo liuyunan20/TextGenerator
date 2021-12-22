@@ -5,19 +5,10 @@ f = open(f'/Users/liudawei/PycharmProjects/Text Generator/Text Generator/task/{i
 wt = WhitespaceTokenizer()
 words = wt.tokenize(f.read())
 
-bigrams = []
-for x in range(0, len(words) - 1):
-    bigrams.append([words[x], words[x + 1]])
 
-uniq_words = set()
-for x in words:
-    uniq_words.add(x)
-# print(uniq_words)
 markov_dict = {}
-for x in uniq_words:
-    for bigram in bigrams:
-        if x == bigram[0]:
-            markov_dict.setdefault(x, []).append(bigram[1])
+for x in range(0, len(words) - 1):
+    markov_dict.setdefault(words[x], []).append(words[x + 1])
 print(markov_dict)
 
 def find_tails(head):
@@ -32,5 +23,6 @@ def find_tails(head):
 
 user_in = input()
 while user_in != "exit":
+    print(f"Head: {user_in}")
     find_tails(user_in)
     user_in = input()
