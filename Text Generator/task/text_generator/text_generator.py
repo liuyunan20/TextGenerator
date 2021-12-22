@@ -9,11 +9,13 @@ words = wt.tokenize(f.read())
 markov_dict = {}
 for x in range(0, len(words) - 1):
     markov_dict.setdefault(words[x], []).append(words[x + 1])
-print(markov_dict)
+# print(markov_dict)
+
 
 def find_tails(head):
-    tail_list = markov_dict[head]
-    if tail_list is None:
+    try:
+        tail_list = markov_dict[head]
+    except KeyError:
         print("Key Error. The requested word is not in the model. Please input another word.")
     else:
         freq = dict(Counter(tail_list))
