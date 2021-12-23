@@ -1,5 +1,5 @@
 def divide_by(number):
-    try:
+    try: 
         n = 100 / number
     except ZeroDivisionError:
         print("Please enter a number that is not equal to zero")

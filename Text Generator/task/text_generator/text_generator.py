@@ -1,6 +1,8 @@
 import random
 from nltk.tokenize import WhitespaceTokenizer
 from collections import Counter
+import re
+
 f = open(f'/Users/liudawei/PycharmProjects/Text Generator/Text Generator/task/{input()}', "r", encoding="utf-8")
 wt = WhitespaceTokenizer()
 words = wt.tokenize(f.read())
@@ -11,8 +13,16 @@ for x in range(0, len(words) - 1):
 
 for i in range(10):
     prev_word = random.choice(words)
+    while re.match('[A-Z]', prev_word) is None or prev_word.endswith(r'[\.\?\!]'):
+        prev_word = random.choice(words)
     sentence = [prev_word]
-    for n in range(9):
+    while len(sentence) < 5:
+        tail_list = markov_dict[prev_word]
+        freq = dict(Counter(tail_list))
+        cur_word = random.choices(list(freq.keys()), weights=tuple(freq.values()))
+        sentence.append(cur_word[0])
+        prev_word = cur_word[0]
+    while not sentence[-1].endswith(r'[\.\?\!]'):
         tail_list = markov_dict[prev_word]
         freq = dict(Counter(tail_list))
         cur_word = random.choices(list(freq.keys()), weights=tuple(freq.values()))
