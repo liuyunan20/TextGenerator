@@ -13,19 +13,16 @@ for x in range(0, len(words) - 1):
 
 for i in range(10):
     prev_word = random.choice(words)
-    while re.match('[A-Z]', prev_word) is None or prev_word.endswith(r'[\.\?\!]'):
+    while re.match('[A-Z]', prev_word) is None or re.search(r'[\.\?\!]$', prev_word):
         prev_word = random.choice(words)
     sentence = [prev_word]
-    while len(sentence) < 5:
+    while True:
+        if len(sentence) >= 5 and re.search(r'[\.\?\!]$', sentence[-1]):
+            break
         tail_list = markov_dict[prev_word]
         freq = dict(Counter(tail_list))
         cur_word = random.choices(list(freq.keys()), weights=tuple(freq.values()))
         sentence.append(cur_word[0])
         prev_word = cur_word[0]
-    while not sentence[-1].endswith(r'[\.\?\!]'):
-        tail_list = markov_dict[prev_word]
-        freq = dict(Counter(tail_list))
-        cur_word = random.choices(list(freq.keys()), weights=tuple(freq.values()))
-        sentence.append(cur_word[0])
-        prev_word = cur_word[0]
+
     print(" ".join(sentence))
